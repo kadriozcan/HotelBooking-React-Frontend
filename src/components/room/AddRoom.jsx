@@ -59,6 +59,19 @@ const AddRoom = () => {
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-6">
             <h2 className="mt-5 mb-2">Add a New Room</h2>
+            {successMessage && (
+              <div className="alert alert-success fade show">
+                {" "}
+                {successMessage}
+              </div>
+            )}
+
+            {errorMessage && (
+              <div className="alert alert-danger fade show">
+                {" "}
+                {errorMessage}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
@@ -77,22 +90,24 @@ const AddRoom = () => {
                   Room Price
                 </label>
                 <input
-                  className="form-control"
                   required
+                  type="number"
+                  className="form-control"
                   id="roomPrice"
                   name="roomPrice"
-                  type="number"
                   value={newRoom.roomPrice}
                   onChange={handleRoomInputChange}
                 />
               </div>
+
               <div className="mb-3">
                 <label htmlFor="photo" className="form-label">
-                  Photo
+                  Room Photo
                 </label>
                 <input
-                  id="photo"
+                  required
                   name="photo"
+                  id="photo"
                   type="file"
                   className="form-control"
                   onChange={handleImageChange}
@@ -100,14 +115,14 @@ const AddRoom = () => {
                 {imagePreview && (
                   <img
                     src={imagePreview}
-                    alt="Preview Room Photo"
+                    alt="Preview  room photo"
                     style={{ maxWidth: "400px", maxHeight: "400px" }}
                     className="mb-3"
-                  />
+                  ></img>
                 )}
               </div>
-              <div className="d-grid d-md-flex mt-2">
-                <button className="btn btn-outline-primary ml-5">
+              <div className="d-grid gap-2 d-md-flex mt-2">
+                <button type="submit" className="btn btn-outline-primary ml-5">
                   Save Room
                 </button>
               </div>
