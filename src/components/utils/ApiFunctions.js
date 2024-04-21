@@ -49,3 +49,23 @@ export async function deleteRoom(roomId) {
     }
 }
 
+// Updates the selected room by id
+export async function updateRoom(roomId, roomData) {
+    const formData = new FormData()
+    formData.append("roomType", roomData.roomType)
+    formData.append("roomPrice", roomData.roomPrice)
+    formData.append("photo", roomData.photo)
+    const response = await api.put(`/rooms/update/${roomId}`)
+    return response
+}
+
+// Get room by its id
+export async function getRoomById(roomId) {
+    try {
+        const response = await api.get(`/rooms/${roomId}`)
+        return response.data
+    } catch (e) {
+        throw new Error(`Error Fetching Room: ${error.message}`)
+    }
+}
+
