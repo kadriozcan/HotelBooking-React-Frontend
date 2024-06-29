@@ -69,3 +69,47 @@ export async function getRoomById(roomId) {
     }
 }
 
+export async function bookRoom(booking) {
+    try {
+        const response = await api.post(`/bookings`, booking)
+        return response.data
+    } catch (e) {
+        if (e.response && e.response.data) {
+            throw new Error(e.response.data)
+        } else {
+            throw new Error(`Error booking room: ${e.message}`)
+        }
+    }
+}
+
+export async function getAllBookings() {
+    try {
+        const result = await api.get(`/bookings`)
+        return result.data
+    } catch (e) {
+        throw new Error(`Error fetching bookings: ${e.message}`)
+    }
+}
+
+export async function getBookingByConfirmationCode(code) {
+    try {
+        const result = await api.get(`/confirmation/${code}`)
+        return result.data
+    } catch (e) {
+        if (e.response && e.response.data) {
+            throw new Error(e.response.data)
+        } else {
+            throw new Error(`Error fetching booking: ${e.message}`)
+        }
+    }
+}
+
+export async function cancelBooking(bookingId) {
+    try {
+        const result = await api.delete(`/bookings/${bookingId}`)
+        return result.data
+    } catch (e) {
+        throw new Error(`Error cancelling booking: ${e.message}`)
+    }
+
+}
